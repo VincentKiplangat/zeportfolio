@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Future of Remote Work: What to Expect" />
+    <meta name="keywords" content="Remote Work, Future of Work, Work Trends, Technology" />
+    <meta name="author" content="VKK Blogs" />
+    <title>VKK Blogs - The Future of Remote Work</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/plugins.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tan-color.css' %}" />
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <a class="logo" href="{% url 'index-main' %}"><span>VKK</span></a>
+        <a class="back-button" href="{% url 'index-main' %}#/blog">
+
+            <i class="fas fa-reply"></i>
+        </a>
+    </header>
+
+    <div class="single-blog" data-simplebar>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="mt-80">
+                        <div class="blog-image mb-40">
+                            <img src="{% static 'img/blogs/2.jpg' %}" alt="Cybersecurity">
+                        </div>
+
+                        <div class="col-lg-10 offset-lg-1">
+                            <ul class="blog-category mb-15">
+                                <li><a href="#">Technology</a></li>
+                                <li><a href="#">Cybersecurity</a></li>
+                            </ul>
+                            <h2 class="blog-title text-center">Cybersecurity in the Digital Age</h2>
+                            <div class="blog-meta mt-15 mb-30 text-center">
+                                <span class="date">Posted On February 7, 2025</span>
+                            </div>
+                        </div>
+
+                        <div class="blog-content">
+                            <p>As technology continues to evolve, cybersecurity has become a critical concern for individuals, businesses, and governments. With increasing cyber threats, protecting sensitive data and systems is more important than ever.</p>
+                            <p>Cybersecurity involves a range of practices, technologies, and strategies aimed at protecting networks, devices, and data from unauthorized access, cyberattacks, and data breaches. From ransomware attacks to phishing scams, cyber threats are constantly evolving, making it essential to stay ahead with robust security measures.</p>
+                            <h3>Common Cyber Threats</h3>
+                            <ul>
+                                <li><strong>Phishing Attacks:</strong> Fraudulent emails or messages designed to trick users into revealing sensitive information.</li>
+                                <li><strong>Malware:</strong> Malicious software that can disrupt or gain unauthorized access to a system.</li>
+                                <li><strong>Ransomware:</strong> Cybercriminals encrypt data and demand ransom for its release.</li>
+                                <li><strong>Data Breaches:</strong> Unauthorized access to sensitive data, leading to potential financial and reputational damage.</li>
+                            </ul>
+                            <h3>How to Stay Protected</h3>
+                            <p>To mitigate cybersecurity risks, individuals and organizations should adopt best practices such as:</p>
+                            <ul>
+                                <li>Using strong and unique passwords for different accounts.</li>
+                                <li>Enabling multi factor authentication for added security.</li>
+                                <li>Keeping software and security patches updated.</li>
+                                <li>Being cautious of suspicious emails and links.</li>
+                                <li>Regularly backing up important data.</li>
+                            </ul>
+                            <blockquote>"Cybersecurity is a shared responsibility – staying informed and proactive is key to a safer digital world."</blockquote>
+                            <p>With the increasing reliance on digital platforms, prioritizing cybersecurity is not optional but a necessity. As threats continue to evolve, organizations must invest in training, advanced security tools, and incident response strategies to stay protected.</p>
+                        </div>
+
+                        <div class="form mt-100 mb-80">
+                            <h2 class="form-title mb-40 text-center">Leave a Comment</h2>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input">
+                                            <input class="input-field" type="text" name="name" placeholder="Your Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input">
+                                            <input class="input-field" type="text" name="email" placeholder="Your Email"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input">
+                                            <textarea class="input-field" name="message" rows="5" placeholder="Message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="submit-button text-center">
+                                            <button class="main-btn">Send Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/plugins.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
