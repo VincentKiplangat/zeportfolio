@@ -6,3 +6,4 @@ dj-database-url==2.3.0
 gunicorn==23.0.0
 sqlparse==0.4.4
 whitenoise==6.9.0
+django-environ
