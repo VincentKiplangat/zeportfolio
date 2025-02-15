@@ -38,10 +38,10 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # DEBUG = os.getenv("DEBUG", "False") == "True"
 DEBUG = env.bool("DEBUG", False)
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 # ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
+# ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 # new line
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
