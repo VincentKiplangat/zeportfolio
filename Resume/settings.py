@@ -42,7 +42,7 @@ DEBUG = True
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 # ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 # ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
-ALLOWED_HOSTS = ["vincentkiplangat.engineer", "www.vincentkiplangat.engineer"]
+ALLOWED_HOSTS = ["vincentkiplangat.engineer", "www.vincentkiplangat.engineer", "159.65.252.112"]
 
 
 # new line
