@@ -1,16 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    /*
-    <link rel="stylesheet" href="bootstrap.css">
-    */
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% load compress static %}
 
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Vincent Kiplangat Blogs</title>
+    {% compress css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    {% endcompress %}
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <style>
+        body {
+            background-color: #1a1a2e;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+        .error-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .error-code {
+            font-size: 200px;
+            font-weight: bold;
+            color:rgba(146, 19, 0, 0.68);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .error-message {
+            font-size: 28px;
+            margin-top: -20px;
+        }
+        .error-description {
+            font-size: 20px;
+            margin: 10px 0 30px;
+        }
+        .main-btn {
+            background-color:rgb(100, 103, 18);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .main-btn:hover {
+            background-color: #388e3c;
+        }
+    </style>
 </head>
+
 <body>
-ERROR 404
+    <div class="error-page">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-message">Oops! Vincent's Page you're looking for is Not around 😒</h2>
+        <p class="error-description">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <a href="{% url 'index-main' %}" class="main-btn">Go Back Home</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let errorCode = document.querySelector(".error-code");
+            errorCode.addEventListener("mouseover", function() {
+                errorCode.style.color = "#ffcc00";
+            });
+            errorCode.addEventListener("mouseleave", function() {
+                errorCode.style.color = "#ff6b6b";
+            });
+        });
+    </script>
 </body>
+
 </html>

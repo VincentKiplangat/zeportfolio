@@ -1,38 +1,14 @@
-from django.shortcuts import render
+from .cache_utils import compress_and_cache, decompress_from_cache
 from .forms import ContactForm
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-
-# def contact(request):
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             subject = "Welcome to Analytic Avengers where we help you predict your CLV"
-#             message = "Our team will contact you within 24hrs."
-#             email_from = settings.EMAIL_HOST_USER
-#             email = form.cleaned_data['email']
-#             recipient_list = [email]
-#             send_mail(subject, message, email_from, recipient_list)
-#             messages.success(request,
-#                              'Your message has been sent successfully. Our team will contact you within 24 hours.')
-#             return redirect('contact')  # Redirect to the same page to display the success message
-#     else:
-#         form = ContactForm()
-#     context = {'form': form}
-#     return render(request, 'index-main.html', context)
-
-
-from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import json
-
 from .models import Contact
 
 
@@ -71,6 +47,33 @@ def contact_form(request):
     return JsonResponse({"status": "error", "message": "Invalid request."})
 
 
+
+# views.py
+@csrf_exempt
+def send_comment(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        blog_title = request.POST.get('blog_title')  # Get the blog title from the form
+
+        # Combine the blog title with the message body
+        subject = f"New Comment on {blog_title} from {name}"
+        body = f"Blog Title: {blog_title}\n\nName: {name}\nEmail: {email}\nMessage: {message}"
+        from_email = 'your_email@example.com'  # Your email
+
+        try:
+            # Send the email to yourself (don't send to the user)
+            send_mail(subject, body, from_email, ['your_email@example.com'])
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+
+
 def error_404(request):
     return render(request, "404.html")
 
@@ -106,3 +109,5 @@ def blog6(request):
 
 def home(request):
     return render(request, "index-main.html")
+
+

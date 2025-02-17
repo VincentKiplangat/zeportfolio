@@ -16,7 +16,8 @@ import environ
 from pathlib import Path
 from django.contrib import messages
 from django.core.management.utils import get_random_secret_key
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,32 +26,20 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(Path(__file__).resolve().parent.parent, ".env"))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = os.getenv("DEBUG", "False") == "True"
-# DEBUG = env.bool("DEBUG", False)
 
-# ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-# ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
-# ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1').split(',')
-ALLOWED_HOSTS = ["vincentkiplangat.engineer", "www.vincentkiplangat.engineer", "159.65.252.112", "localhost",]
+DJANGO_ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS.split(",") if DJANGO_ALLOWED_HOSTS else []
+
+
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"]
 
 
 
 
-# new line
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -62,6 +51,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'rest_framework',
     'crispy_forms',
+    "compressor",
 
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap5', 'uni_form', 'bootstrap', 'bootstrap3')
@@ -111,6 +101,14 @@ DATABASES = {
     }
 }
 
+# if not DEBUG:  # Only enable security settings in production
+#     SECURE_SSL_REDIRECT = True
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
+#     X_FRAME_OPTIONS = "DENY"
+#     SECURE_BROWSER_XSS_FILTER = True
+#     SECURE_CONTENT_TYPE_NOSNIFF = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -152,8 +150,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'Resume/assets')
 
-
 ]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = True
 
 MEDIA_URL = 'media/'
 
@@ -194,15 +200,21 @@ AUTHENTICATION_BACKENDS = [
     # other backends...
 ]
 
+# CACHES = {
+#     'default': {
+#         # 'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         # 'LOCATION': '159.65.252.112:11211',
+#         'LOCATION': '127.0.0:11211',
+#         # Replace with the IP address of your droplet
+#     }
+# }
 
-# django_project/settings.py
+
 # Email Settings
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")

@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from .views import contact_form
-
 urlpatterns = [
     path('', views.home, name="index-main"),
     path('blog/Technology', views.blog, name="single-blog"),
@@ -11,6 +10,6 @@ urlpatterns = [
     path('blog/Cloud Computing', views.blog5, name="single-blog5"),
     path('blog/Workplace Trend', views.blog6, name="single-blog6"),
     path('error_404', views.error_404, name="error-404"),
+    path('send_comment/', views.send_comment, name='send_comment'),
     path("contact/submit/", views.contact_form, name="contact_submit"),
-
 ]
