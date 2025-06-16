@@ -34,12 +34,19 @@ DJANGO_ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "")
 ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS.split(",") if DJANGO_ALLOWED_HOSTS else []
 
 
-DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"]
+# DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() in ["true", "1"]
+DEBUG = False
+if not DEBUG:  # Only enable security settings in production
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = "DENY"
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 
-
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -101,13 +108,7 @@ DATABASES = {
     }
 }
 
-if not DEBUG:  # Only enable security settings in production
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    X_FRAME_OPTIONS = "DENY"
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
+
 
 
 # Password validation
