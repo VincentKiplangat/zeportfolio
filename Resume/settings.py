@@ -15,6 +15,7 @@ import os
 import environ
 from pathlib import Path
 from django.contrib import messages
+import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 load_dotenv()
@@ -101,12 +102,39 @@ WSGI_APPLICATION = "Resume.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+# Database - Updated for PostgreSQL
+# It will use DATABASE_URL from .env if it exists, otherwise it falls back to SQLite
 DATABASES = {
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600
+    )
+}
+
+# Caches - Updated for Redis
+# Replace your commented-out Memcached block with this Redis block
+CACHES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env("REDIS_URL", default="redis://127.0.0.1:6379/1"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
+
+# Session engine - Tells Django to store sessions in Redis for speed
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+
 
 
 
