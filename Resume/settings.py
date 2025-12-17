@@ -233,12 +233,18 @@ AUTHENTICATION_BACKENDS = [
 #     'default': {
 #         # 'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
 #         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         # 'LOCATION': '159.65.252.112:11211',
+#         # 'LOCATION': '142.93.38.38:11211',
 #         'LOCATION': '127.0.0:11211',
 #         # Replace with the IP address of your droplet
 #     }
 # }
 
+
+# In Resume/settings.py
+CSRF_TRUSTED_ORIGINS = [
+    "https://vincentkiplangat.engineer",
+    "https://www.vincentkiplangat.engineer"
+]
 
 # Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
